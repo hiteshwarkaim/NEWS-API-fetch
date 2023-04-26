@@ -121,6 +121,16 @@ constructor(){
     }
 }
 
+//it is run after render
+async componentDidMount(){
+  let url="https://newsapi.org/v2/everything?q=Apple&sortBy=popularity&apiKey=71b90f466e9746ac821cd8d22f56f6d1";
+  let data = await fetch(url);
+  let parsedData=await data.json();
+  this.setState({articles:parsedData.articles})
+  console.log(data);
+}
+
+
   render() {
     return (
       <>
