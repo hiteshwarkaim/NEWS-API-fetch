@@ -1,14 +1,11 @@
-import './App.css';
-import News from './News';
-
+import "./App.css";
+import News from "./News";
 
 function App() {
-
-  
   return (
-   <>
-    <News/>
-   </>
+    <>
+      <News pageSize={5} country="in" category="sports" />
+    </>
   );
 }
 
