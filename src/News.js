@@ -10,6 +10,7 @@ export default class News extends Component {
     this.state = {
       articles: this.articles,
       loading: false,
+      page: 1,
     };
   }
 
@@ -23,6 +24,36 @@ export default class News extends Component {
     this.setState({ articles: parsedData.articles });
     // console.log(parsedData);
   }
+
+  handlePrevious = async () => {
+    let url = `https://newsapi.org/v2/everything?q=Apple&sortBy=popularity&apiKey=71b90f466e9746ac821cd8d22f56f6d1&page=${
+      this.state.page - 1
+    }`;
+    let data = await fetch(url); //it returns promise
+    let parsedData = await data.json();
+    // this.setState({ articles: parsedData.articles });
+
+    this.setState({
+      page: this.state.page - 1,
+      articles: parsedData.articles,
+    });
+  };
+
+  handleNext = async () => {
+    console.log("next");
+    let url = `https://newsapi.org/v2/everything?q=Apple&sortBy=popularity&apiKey=71b90f466e9746ac821cd8d22f56f6d1&page=${
+      this.state.page + 1
+    }`;
+    console.log(this.state.page);
+    let data = await fetch(url); //it returns promise
+    let parsedData = await data.json();
+    // this.setState({ articles: parsedData.articles });
+
+    this.setState({
+      page: this.state.page + 1,
+      articles: parsedData.articles,
+    });
+  };
 
   render() {
     return (
@@ -43,6 +74,24 @@ export default class News extends Component {
               );
             })}
           </div>
+        </div>
+
+        <div>
+          <button
+            type="button"
+            className="btn btn-dark"
+            onClick={this.handlePrevious}
+            disabled={this.state.page <= 1}
+          >
+            Previous
+          </button>
+          <button
+            type="button"
+            className="btn btn-dark"
+            onClick={this.handleNext}
+          >
+            Next
+          </button>
         </div>
       </>
     );
