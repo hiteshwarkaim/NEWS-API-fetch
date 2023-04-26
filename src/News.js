@@ -1324,7 +1324,7 @@ constructor(){
               <div className="row">
               {this.state.articles.map((article)=>{
                 return <div className="col">
-                        <NewsItem title="myTitle" description="my description"/>
+                        <NewsItem key={article.url} title={article.title} description={article.description} imageUrl={article.urlToImage}/>
                     </div>
               })}
                   
